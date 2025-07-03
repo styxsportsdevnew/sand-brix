@@ -122,11 +122,106 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
         onError={() => console.error("Failed to load video:", src)}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
-        className="w-full h-auto"></video>
+        className="w-full h-auto"
+        onClick={togglePlay}
+      />
+
+      {/* Center Play/Pause Button for Mobile */}
+      <div className="absolute inset-0 flex items-center justify-center sm:hidden">
+        <button onClick={togglePlay} className="bg-black/50 p-3 rounded-full backdrop-blur-sm">
+          {isPlaying ? (
+            <Pause size={32} className="text-white" />
+          ) : (
+            <Play size={32} className="text-white ml-1" />
+          )}
+        </button>
+      </div>
+
+      {/* Playback Speed - Top Right for Mobile */}
+      <div className="absolute top-4 right-4 sm:hidden" ref={speedRef}>
+        <button
+          onClick={() => setShowSpeedMenu(!showSpeedMenu)}
+          className="text-sm px-2 py-1 bg-black/50 text-white rounded backdrop-blur-sm">
+          {playbackRate}x
+        </button>
+        {showSpeedMenu && (
+          <div className="absolute top-8 right-0 bg-black border border-gray-600 rounded text-xs z-10 max-h-40 overflow-y-auto w-24">
+            {[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].map((rate) => (
+              <div
+                key={rate}
+                className={`px-8 py-2 text-center cursor-pointer hover:bg-gray-700 ${
+                  rate === playbackRate ? "bg-gray-800 text-red-500" : "text-white"
+                }`}
+                onClick={() => {
+                  setPlaybackRate(rate);
+                  setShowSpeedMenu(false);
+                }}>
+                {rate}x
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Controls */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 text-white">
-        <div className="flex items-center gap-4 text-sm">
+        {/* Mobile Layout (sm and below) */}
+        <div className="sm:hidden">
+          <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center gap-1">
+              <span className="text-xs">{formatTime(currentTime)}</span>
+              <span className="text-xs text-[#9F9F9F]">/</span>
+              <span className="text-xs text-[#9F9F9F]">{formatTime(duration)}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              {/* Volume */}
+              <div className="relative" ref={volumeRef}>
+                <button
+                  onClick={() => setShowVolumeSlider(!showVolumeSlider)}
+                  className="cursor-pointer">
+                  {volume > 0 ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+                {showVolumeSlider && (
+                  <div className="absolute bottom-8 right-0 bg-black border border-gray-700 p-2 rounded">
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      value={volume}
+                      onChange={handleVolumeChange}
+                      className="w-20 cursor-pointer"
+                    />
+                  </div>
+                )}
+              </div>
+              {/* Fullscreen */}
+              <button onClick={handleFullscreen} className="cursor-pointer mb-2">
+                <Maximize size={18} />
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom Row: Seek Bar */}
+          <div className="w-full">
+            <input
+              type="range"
+              min="0"
+              max={duration}
+              value={currentTime}
+              onChange={handleSeek}
+              className="w-full appearance-none h-1 bg-[#272727] rounded [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-red-500 [&::-webkit-slider-thumb]:rounded-full cursor-pointer"
+              style={{
+                background: `linear-gradient(to right, #ef4444 ${
+                  (currentTime / duration) * 100 || 0
+                }%, #272727 0%)`,
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Desktop Layout (sm and above) */}
+        <div className="hidden sm:flex items-center gap-4 text-sm">
           {/* Play/Pause */}
           <button onClick={togglePlay} className="bg-[#B5B5B5] p-1 cursor-pointer">
             {isPlaying ? (
@@ -146,7 +241,12 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
             max={duration}
             value={currentTime}
             onChange={handleSeek}
-            className="flex-1 appearance-none h-1 bg-gray-600 rounded mx-2 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:rounded-full cursor-pointer"
+            className="w-full appearance-none h-1 bg-[#272727] rounded [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-red-500 [&::-webkit-slider-thumb]:rounded-full cursor-pointer"
+            style={{
+              background: `linear-gradient(to right, #ef4444 ${
+                (currentTime / duration) * 100 || 0
+              }%, #272727 0%)`,
+            }}
           />
 
           {/* Total Duration */}
