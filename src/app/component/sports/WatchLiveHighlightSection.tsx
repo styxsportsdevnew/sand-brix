@@ -16,13 +16,36 @@ import SportsBanner from "./SportsBanner";
 import banner1 from "@/app/assets/sports/Rohit-Sharma.jpg";
 import banner2 from "@/app/assets/banner/banner-01.png";
 import banner3 from "@/app/assets/banner/banner-02.png";
+import matchLogo from "@/app/assets/sports/matchlogo.jpg";
+
+
 import PopularLiveStreamingSection from "../section/PopularLiveStreamingSection";
 import SeriesHighlight from "./SeriesHighlight";
 import HighlightsBySandbrix from "./HighlightBySandbrix";
 import ChampionsFeel from "./ChampionsFeel";
 import OurMediaGallery from "./OurMediaGallery";
 
-const bannerSlides = [banner1, banner2, banner3];
+const bannerSlides =[
+    {
+      image: banner1,
+       logo: matchLogo,
+      title: "India Tour of England 2025 . 30m . Cricket",
+      description:
+        "All-round England sealed their second-highest chase in whites as they made India pay for their mistakes in 1st Test in Leeds to take a 1-0 series lead.",
+    },
+    {
+      image: banner2,
+      title: "",
+      description:
+        "",
+    },
+
+      {
+      image: banner3,
+      title: "",
+      description:"",
+    },
+  ]
 
 interface ArrowProps extends React.ComponentPropsWithoutRef<"button"> {
   onClick?: () => void;
