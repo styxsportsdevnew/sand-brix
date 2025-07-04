@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Banner from "./Banner";
+import BannerSlider from "./slider/BannerSlider";
 import LiveHighlightSection from "./section/LiveHighlightSection";
 import ViewAllSection from "./section/ViewAllSection";
 import VideoPlaySection from "./section/VideoPlaySection";
@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <>
       <div className="bg-[#180000]">
-        <Banner />
+        <BannerSlider />
         <LiveHighlightSection />
         {/* News Section */}
         <CarouselSlider
