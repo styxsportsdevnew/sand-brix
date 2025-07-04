@@ -21,13 +21,13 @@ export default function BottomSection() {
   return (
     <div className="w-full flex justify-center mt-10 px-4 sm:px-6 lg:px-0">
       <div className="flex flex-col lg:flex-row gap-6 max-w-[1200px] w-full">
-        {/* Left side: ScoreCard + LiveScoreCard */}
+
         <div className="flex flex-col gap-4 flex-1">
           <ScoreCard />
 
-          {/* Filter Buttons and Share Section */}
+  
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
-            {/* Desktop Filter Buttons */}
+
             <div className="hidden md:flex gap-[10px] w-full max-w-full ml-2">
               {filterButtons.map((btn) => (
                 <div
@@ -40,7 +40,7 @@ export default function BottomSection() {
                   }`}
                   style={{
                     width: btn.width,
-                    height: '34px', // enough space to show border
+                    height: '34px', 
                     flexShrink: 0,
                     flexGrow: 0,
                   }}
@@ -50,7 +50,7 @@ export default function BottomSection() {
               ))}
             </div>
 
-            {/* Mobile Filter Buttons */}
+  
             <div className="flex flex-wrap md:hidden justify-start gap-2 w-full max-w-full">
               {filterButtons.map((btn) => (
                 <div
@@ -73,20 +73,20 @@ export default function BottomSection() {
               ))}
             </div>
 
-            {/* Share With */}
+        
             <div className="flex text-[14px] underline cursor-pointer text-white whitespace-nowrap mt-2 sm:mt-0 mr-8">
               <p>Share With</p>&nbsp;
               <SquareArrowOutUpRight className="w-4 h-4 mt-0" />
             </div>
           </div>
 
-          {/* Conditionally show content based on activeFilter */}
+   
           {activeFilter === 'Live' && <LiveScoreCard />}
           <CommentaryCard />
-          {/* You can conditionally render other components similarly */}
+
         </div>
 
-        {/* Right side: stacked cards */}
+
         <div className="flex flex-col gap-4 pt-4 items-center flex-shrink-0 w-full sm:w-auto sm:max-w-[350px]">
           <LanguageCard />
           <MatchDetail />
