@@ -22,21 +22,25 @@ const Header = () => {
   const searchRef = useRef<HTMLDivElement | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
         setDropdownOpen(false);
       }
 
-      if (languageRef.current && !languageRef.current.contains(event.target as Node)) {
+      if (languageRef.current && !languageRef.current.contains(target)) {
         setLanguageOpen(false);
       }
 
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (searchRef.current && !searchRef.current.contains(target)) {
         setSearchOpen(false);
       }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(target))
+        setMobileMenuOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -253,36 +257,56 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <hr className="text-[#404040] mt-2" />
-      </header>
-      {/* Mobile Nav Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#180000] w-full px-4 py-2 sticky top-20 left-0 z-40 show-mobile">
-          <nav className="flex flex-col space-y-4 mt-2 ml-1 md:ml-3">
-            <div className="flex justify-between items-center">
-              <Link href="/" className="text-white hover:text-gray-300 text-sm">
-                Home
-              </Link>
-              <X
-                className="w-4 h-4 stroke-3 text-white cursor-pointer"
-                onClick={() => setMobileMenuOpen(false)}
-              />
+
+        {/* Mobile Nav Menu */}
+        <div className="relative" ref={mobileMenuRef}>
+          <hr className="text-[#404040] mt-2" />
+          {mobileMenuOpen && (
+            <div
+              className={`lg:hidden absolute top-full left-0 w-full bg-[#180000] p-4 z-40 show-mobile ${
+                mobileMenuOpen ? "mobile-menu-open" : "hidden"
+              }`}>
+              <nav className="flex flex-col space-y-4 ml-1 md:ml-3">
+                <div className="flex justify-between items-center">
+                  <Link
+                    href="/"
+                    className={`text-sm ${
+                      pathname === "/"
+                        ? "text-red-500 hover:text-red-600"
+                        : "text-[#9F9F9F] hover:text-gray-300"
+                    } `}
+                    onClick={() => setMobileMenuOpen(false)}>
+                    Home
+                  </Link>
+                  <X
+                    className="w-5 h-5 stroke-3 text-white cursor-pointer"
+                    onClick={() => setMobileMenuOpen(false)}
+                  />
+                </div>
+                {[
+                  { href: "/shows", label: "Shows" },
+                  { href: "/documentaries", label: "Documentaries" },
+                  { href: "/news", label: "News & Politics" },
+                  { href: "/sports", label: "Sports" },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`w-fit text-sm ${
+                      pathname === item.href
+                        ? "text-red-500 hover:text-red-600"
+                        : "text-[#9F9F9F] hover:text-gray-300"
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}>
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
             </div>
-            <Link href="/shows" className="text-[#9F9F9F] hover:text-gray-300 text-sm">
-              Shows
-            </Link>
-            <Link href="/documentaries" className="text-[#9F9F9F] hover:text-gray-300 text-sm">
-              Documentaries
-            </Link>
-            <Link href="/news" className="text-[#9F9F9F] hover:text-gray-300 text-sm">
-              News & Politics
-            </Link>
-            <Link href="/sports" className="text-[#9F9F9F] hover:text-gray-300 text-sm">
-              Sports
-            </Link>
-          </nav>
+          )}
         </div>
-      )}
+      </header>
+
       <style jsx>{`
         @keyframes marquee {
           0% {
@@ -292,7 +316,7 @@ const Header = () => {
             transform: translateX(-100%);
           }
         }
-          
+
         // header nav items
         @media (max-width: 1370px) {
           .show-mobile {
@@ -309,6 +333,21 @@ const Header = () => {
           .hide-desktop {
             display: flex !important;
           }
+        }
+        // mobile list
+        @keyframes slideDownFade {
+          0% {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .mobile-menu-open {
+          animation: slideDownFade 0.3s ease-out forwards;
         }
       `}</style>
     </>
