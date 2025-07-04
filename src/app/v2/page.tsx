@@ -6,7 +6,7 @@ import VideoPlaySection from "../component/section/VideoPlaySection";
 import PopularLiveStreamingSection from "../component/section/PopularLiveStreamingSection";
 import RecentlyViewedSection from "../component/section/RecentlyViewedSection";
 import AllInOneSection from "../component/section/AllInOneSection";
-import CarouselSlider from "../component/slider/CarouselSlider";
+import CarouselSlider from "../component/common/CarouselSlider";
 
 // News Images
 import newsImage1 from "../assets/images/news-01.png";

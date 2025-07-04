@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import BannerSlider from "./slider/BannerSlider";
+import BannerSlider from "./common/BannerSlider";
 import LiveHighlightSection from "./section/LiveHighlightSection";
 import ViewAllSection from "./section/ViewAllSection";
 import VideoPlaySection from "./section/VideoPlaySection";
 import PopularLiveStreamingSection from "./section/PopularLiveStreamingSection";
 import RecentlyViewedSection from "./section/RecentlyViewedSection";
-import CarouselSlider from "./slider/CarouselSlider";
+import CarouselSlider from "./common/CarouselSlider";
 
 // News Images
 import newsImage1 from "../assets/images/news-01.png";
