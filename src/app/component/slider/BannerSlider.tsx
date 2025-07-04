@@ -3,11 +3,12 @@ import React from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { CustomArrowProps } from "react-slick";
 
 import image1 from "../../assets/banner/banner-01.png";
 import image2 from "../../assets/banner/banner-02.png";
 import image3 from "../../assets/banner/banner-01.png";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Banner {
   id: number;
@@ -21,7 +22,7 @@ const banners: Banner[] = [
   { id: 3, image: image3, alt: "Banner 3" },
 ];
 
-const NextArrow = ({ onClick }: any) => (
+const NextArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   <button
     onClick={onClick}
     className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-2 cursor-pointer hidden sm:block"
@@ -30,7 +31,7 @@ const NextArrow = ({ onClick }: any) => (
   </button>
 );
 
-const PrevArrow = ({ onClick }: any) => (
+const PrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   <button
     onClick={onClick}
     className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-2 cursor-pointer hidden sm:block"
