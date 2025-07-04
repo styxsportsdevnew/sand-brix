@@ -33,13 +33,14 @@ export default function BottomSection() {
                 <div
                   key={btn.label}
                   onClick={() => setActiveFilter(btn.label)}
-                  className={`flex items-center justify-center text-[#8D7575] text-[14px] cursor-pointer ${
-                    activeFilter === btn.label ? 'text-white' : ''
+                  className={`flex items-center justify-center text-[14px] cursor-pointer border-b-[3px] ${
+                    activeFilter === btn.label
+                      ? 'text-white border-[#FF0000]'
+                      : 'text-[#8D7575] border-transparent'
                   }`}
                   style={{
                     width: btn.width,
-                    height: '31px',
-                    opacity: 1,
+                    height: '34px', // enough space to show border
                     flexShrink: 0,
                     flexGrow: 0,
                   }}
@@ -55,13 +56,14 @@ export default function BottomSection() {
                 <div
                   key={btn.label}
                   onClick={() => setActiveFilter(btn.label)}
-                  className={`flex items-center justify-center text-[#8D7575] text-[14px] cursor-pointer ${
-                    activeFilter === btn.label ? 'text-white' : ''
+                  className={`flex items-center justify-center text-[14px] cursor-pointer border-b-[3px] ${
+                    activeFilter === btn.label
+                      ? 'text-white border-[#FF0000]'
+                      : 'text-[#8D7575] border-transparent'
                   }`}
                   style={{
                     minWidth: btn.width,
-                    height: '31px',
-                    opacity: 1,
+                    height: '34px',
                     flexShrink: 1,
                     flexGrow: 0,
                   }}
@@ -72,19 +74,22 @@ export default function BottomSection() {
             </div>
 
             {/* Share With */}
-            <div className="flex  text-[14px] underline cursor-pointer text-white whitespace-nowrap mt-2 sm:mt-0 mr-8">
-              <p>Share With</p>&nbsp; <SquareArrowOutUpRight className="w-4 h-4 mt-0" />
+            <div className="flex text-[14px] underline cursor-pointer text-white whitespace-nowrap mt-2 sm:mt-0 mr-8">
+              <p>Share With</p>&nbsp;
+              <SquareArrowOutUpRight className="w-4 h-4 mt-0" />
             </div>
           </div>
 
-          <LiveScoreCard />
+          {/* Conditionally show content based on activeFilter */}
+          {activeFilter === 'Live' && <LiveScoreCard />}
           <CommentaryCard />
+          {/* You can conditionally render other components similarly */}
         </div>
 
         {/* Right side: stacked cards */}
         <div className="flex flex-col gap-4 pt-4 items-center flex-shrink-0 w-full sm:w-auto sm:max-w-[350px]">
           <LanguageCard />
-          <MatchDetail /> {/* Ensure MatchDetail internally handles overflow */}
+          <MatchDetail />
           <div className="flex justify-center items-center text-center text-[14px] text-white">
             <p>ADVERTISEMENT</p>
           </div>
