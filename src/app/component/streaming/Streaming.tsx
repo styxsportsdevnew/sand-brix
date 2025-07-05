@@ -114,7 +114,7 @@ export default function Streaming() {
               className="w-full h-full object-cover"
               controls
               src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164">
-              The video will play automatically as soon as it's available.
+              Once available, the video will play automatically.
             </video>
           </div>
 
