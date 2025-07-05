@@ -1,13 +1,7 @@
 import React from 'react';
 
 export default function MatchDetail() {
-  return (
-    <div className="w-full max-w-[419px] bg-[#2D0000] rounded-[5px] text-white overflow-hidden">
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4 text-[16px]">Match Details</h2>
-      </div>
-
-      {[
+  const matchDetails = [
         { label: 'Toss', value: 'India, elected to bat first' },
         {
           label: 'Series',
@@ -54,7 +48,14 @@ export default function MatchDetail() {
             </div>
           )
         }
-      ].map((item, idx) => (
+      ]
+  return (
+    <div className="w-full max-w-[419px] bg-[#2D0000] rounded-[5px] text-white overflow-hidden">
+      <div className="p-4">
+        <h2 className="mb-4 text-[16px]">Match Details</h2>
+      </div>
+
+      {matchDetails.map((item, idx) => (
         <div key={idx} className="w-full">
           <div className="w-full border-t border-[#492F2F] mt-4" />
           <div className="grid grid-cols-[110px_1fr] gap-4 text-[14px] px-4 mt-4 items-start min-w-0">

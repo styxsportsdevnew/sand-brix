@@ -27,6 +27,7 @@ export default function WatchNow() {
       username: 'John Doe',
       message: 'Hi 😃😃😉 anybody here',
       time: '9:45',
+      fill:false,
     },
     {
       id: 2,
@@ -34,6 +35,7 @@ export default function WatchNow() {
       username: 'Jane Smith',
       message: "Hello John! Yes, I'm here. 🤩😎",
       time: '9:46',
+       fill:true,
     },
     {
       id: 3,
@@ -41,6 +43,7 @@ export default function WatchNow() {
       username: 'Mike Johnson',
       message: 'Great game today!',
       time: '9:47',
+       fill:true,
     },
       {
       id: 1,
@@ -48,6 +51,7 @@ export default function WatchNow() {
       username: 'John Doe',
       message: 'Hi 😃😃😉 anybody here',
       time: '9:45',
+       fill:false,
     },
     {
       id: 2,
@@ -55,6 +59,7 @@ export default function WatchNow() {
       username: 'Jane Smith',
       message: "Hello John! Yes, I'm here. 🤩😎",
       time: '9:46',
+       fill:false,
     },
     {
       id: 3,
@@ -62,6 +67,7 @@ export default function WatchNow() {
       username: 'Mike Johnson',
       message: 'Great game today!',
       time: '9:47',
+       fill:true,
     },
       {
       id: 1,
@@ -69,6 +75,7 @@ export default function WatchNow() {
       username: 'John Doe',
       message: 'Hi 😃😃😉 anybody here',
       time: '9:45',
+       fill:true,
     },
     {
       id: 2,
@@ -76,6 +83,7 @@ export default function WatchNow() {
       username: 'Jane Smith',
       message: "Hello John! Yes, I'm here. 🤩😎",
       time: '9:46',
+       fill:false,
     },
  
   
@@ -204,7 +212,7 @@ export default function WatchNow() {
             {/* Chat Messages */}
             <div className="flex flex-col bg-[#170000]">
               {chats.length > 0 ? (
-                chats.map(({ id, username, message, time }, index) => (
+                chats.map(({ id, username, message, time ,fill}, index) => (
                   <div
                     key={`${id}-${index}`}
                     className="flex justify-between items-center px-4 text-white py-2"
@@ -219,9 +227,9 @@ export default function WatchNow() {
                       </div>
                     </div>
                     <div className="flex items-center gap-1 text-gray-400">
-                      <EllipsisVertical className="w-3 h-3 cursor-pointer hover:scale-105 transition" />
-                      <Star className="w-3 h-3 cursor-pointer hover:scale-105 transition" color="yellow" />
-                      <p className="text-[10px] leading-none">{time}</p>
+                      <EllipsisVertical className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
+                      <Star className="w-4 h-4 cursor-pointer hover:scale-105 transition" fill={fill ? 'yellow' : ""} color="yellow" />
+                      <p className="text-[11px] leading-none">{time}</p>
                     </div>
                   </div>
                 ))
