@@ -19,15 +19,17 @@ export default function BottomSection() {
   ];
 
   return (
-    <div className="w-full flex justify-center mt-10 px-4 sm:px-6 lg:px-0">
-      <div className="flex flex-col lg:flex-row gap-6 max-w-[1200px] w-full">
-
-        <div className="flex flex-col gap-4 flex-1">
+    <div className="w-full flex justify-center mt-2 px-4 sm:px-6 lg:px-0">
+      <div className="flex flex-col lg:flex-row gap-6 max-w-[1200px] w-full items-stretch">
+        
+        {/* Left Section */}
+        <div className="flex flex-col gap-4 w-full lg:flex-1">
           <ScoreCard />
 
-  
+          {/* Tabs + Share */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
 
+            {/* Desktop Tabs */}
             <div className="hidden md:flex gap-[10px] w-full max-w-full ml-2">
               {filterButtons.map((btn) => (
                 <div
@@ -40,7 +42,7 @@ export default function BottomSection() {
                   }`}
                   style={{
                     width: btn.width,
-                    height: '34px', 
+                    height: '34px',
                     flexShrink: 0,
                     flexGrow: 0,
                   }}
@@ -50,7 +52,7 @@ export default function BottomSection() {
               ))}
             </div>
 
-  
+            {/* Mobile Tabs */}
             <div className="flex flex-wrap md:hidden justify-start gap-2 w-full max-w-full">
               {filterButtons.map((btn) => (
                 <div
@@ -73,27 +75,35 @@ export default function BottomSection() {
               ))}
             </div>
 
-        
+            {/* Share Section */}
             <div className="flex text-[14px] underline cursor-pointer text-white whitespace-nowrap mt-2 sm:mt-0 mr-8">
               <p>Share With</p>&nbsp;
               <SquareArrowOutUpRight className="w-4 h-4 mt-0" />
             </div>
           </div>
 
-   
+          {/* Tab-Specific Content */}
           {activeFilter === 'Live' && <LiveScoreCard />}
-          <CommentaryCard />
+          {/* CommentaryCard always visible */}
+    
+ <div className="w-full lg:ml-2">
+  <CommentaryCard />
+</div>
 
         </div>
 
-
-        <div className="flex flex-col gap-4 pt-4 items-center flex-shrink-0 w-full sm:w-auto sm:max-w-[350px]">
+        {/* Right Section */}
+        <div className="flex flex-col gap-4 pt-4 items-center sm:items-start w-full sm:w-auto sm:max-w-[350px]">
           <LanguageCard />
           <MatchDetail />
-          <div className="flex justify-center items-center text-center text-[14px] text-white">
+          <div className="flex justify-center items-center text-center text-[14px] text-white w-full">
             <p>ADVERTISEMENT</p>
           </div>
-          <AdvertisementCard />
+
+           <div className="w-full flex justify-center text-center items-center">
+     <AdvertisementCard />
+           </div>
+     
         </div>
       </div>
     </div>

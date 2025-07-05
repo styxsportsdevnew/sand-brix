@@ -17,7 +17,7 @@ export default function CommentaryCard() {
   ];
 
   return (
-    <div className="w-full max-w-[800px] bg-[#2D0000] rounded-md text-white px-4 py-5 ml-4">
+    <div className="w-full max-w-[800px] bg-[#2D0000] rounded-md text-white px-4 py-5 ">
       <h2 className="text-[18px]  mb-4">Commentary</h2>
 
       {/* Filters */}

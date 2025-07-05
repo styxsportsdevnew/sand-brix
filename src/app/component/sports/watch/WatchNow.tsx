@@ -85,7 +85,39 @@ export default function WatchNow() {
       time: '9:46',
        fill:false,
     },
- 
+ ,
+      {
+      id: 1,
+      avatar: chatlogo,
+      username: 'John Doe',
+      message: 'Hi 😃😃😉 anybody here',
+      time: '9:45',
+       fill:true,
+    },
+    {
+      id: 2,
+      avatar: chatlogo,
+      username: 'Jane Smith',
+      message: "Hello John! Yes, I'm here. 🤩😎",
+      time: '9:46',
+       fill:false,
+    },,
+      {
+      id: 1,
+      avatar: chatlogo,
+      username: 'John Doe',
+      message: 'Hi 😃😃😉 anybody here',
+      time: '9:45',
+       fill:true,
+    },
+    {
+      id: 2,
+      avatar: chatlogo,
+      username: 'Jane Smith',
+      message: "Hello John! Yes, I'm here. 🤩😎",
+      time: '9:46',
+       fill:false,
+    },
   
   ];
 
@@ -103,8 +135,10 @@ export default function WatchNow() {
       }}
     >
       <div className="w-full py-2">
-        <div className="flex flex-col lg:flex-row items-start border-b border-[#7070705E]">
+  <div className="flex flex-col lg:flex-row items-start border-b border-[#7070705E] lg:h-[calc(100vh-130px)] overflow-hidden">
+
           {/* Video + Info Column */}
+          
        <div className="w-full lg:w-[70%] flex flex-col lg:border-r border-[#7070705E]">
             {/* Video */}
             <div className="aspect-video bg-cover bg-center relative border border-[#7070705E]">
@@ -172,9 +206,13 @@ export default function WatchNow() {
           </div>
 
           {/* Chat Section */}
-          <div className="w-full lg:w-[30%] h-[50vh] lg:h-auto overflow-y-auto bg-[#170000]">
+   
+      <div className="w-full lg:w-[30%] bg-[#170000] flex flex-col max-h-screen sm:h-[calc(100vh-130px)]">
+
+
+      
             {/* Header Toggle */}
-            <div className="h-[55px] border-b border-[#7070705E] flex justify-center items-center text-white bg-[#250F0F]">
+            <div className="h-[90px] border-b border-[#7070705E] flex justify-center items-center text-white bg-[#250F0F] cursor-pointer">
               <div className="w-full h-full grid grid-cols-2 text-sm">
                 <div className="flex items-center justify-center border-r border-[#7070705E]">
                   <CircleSmall width={15} height={15} color="red" fill="red" /> &nbsp; Live Chat
@@ -210,35 +248,42 @@ export default function WatchNow() {
             </div>
 
             {/* Chat Messages */}
-            <div className="flex flex-col bg-[#170000]">
-              {chats.length > 0 ? (
-                chats.map(({ id, username, message, time ,fill}, index) => (
-                  <div
-                    key={`${id}-${index}`}
-                    className="flex justify-between items-center px-4 text-white py-2"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#863535] flex items-center justify-center text-white font-semibold text-sm select-none">
-                        {getInitials(username)}
-                      </div>
-                      <div className="flex flex-col leading-tight">
-                        <p className="text-[12px] font-semibold">{username}</p>
-                        <p className="text-[10px] text-gray-300">{message}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-400">
-                      <EllipsisVertical className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
-                      <Star className="w-4 h-4 cursor-pointer hover:scale-105 transition" fill={fill ? 'yellow' : ""} color="yellow" />
-                      <p className="text-[11px] leading-none">{time}</p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="flex justify-center items-center py-8 text-gray-500 text-sm">
-                  No conversations yet.
-                </div>
-              )}
-            </div>
+      {/* Chat Messages */}
+<div className="flex flex-col bg-[#170000] overflow-y-auto flex-grow">
+{chats.filter(Boolean).length > 0 ? (
+  chats
+    .filter((chat) => chat !== undefined)
+    .map(({ id, username, message, time, fill }, index) => (
+      <div
+        key={`${id}-${index}`}
+        className="flex justify-between items-center px-4 text-white py-2"
+      >
+        {/* Chat message layout */}
+        <div className="flex items-start gap-3 w-full">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#863535] flex items-center justify-center text-white font-semibold text-sm select-none">
+            {getInitials(username)}
+          </div>
+          <div className="flex flex-col leading-tight max-w-full break-words">
+            <p className="text-[12px] font-semibold">{username}</p>
+            <p className="text-[10px] text-gray-300 break-words max-w-[230px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px]">
+              {message}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1 text-gray-400">
+          <EllipsisVertical className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
+          <Star className="w-4 h-4 cursor-pointer hover:scale-105 transition" fill={fill ? 'yellow' : ""} color="yellow" />
+          <p className="text-[11px] leading-none">{time}</p>
+        </div>
+      </div>
+    ))
+) : (
+  <div className="flex justify-center items-center py-8 text-gray-500 text-sm">
+    No conversations yet.
+  </div>
+)}
+</div>
+
           </div>
         </div>
       </div>
