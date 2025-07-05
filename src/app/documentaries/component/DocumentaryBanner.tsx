@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import image1 from "../../assets/documentariesImages/portrait-terrifing-clown.png";
 // import image1 from "../../assets/documentariesImages/portrait-terrifing-clown@2x.png";
 
@@ -11,6 +12,7 @@ import preview3 from "../../assets/documentariesImages/previewSlider/Cobra_set13
 import preview4 from "../../assets/documentariesImages/previewSlider/agent_tamil_12march_landscape_Thumb.png";
 
 const DocumentaryBanner = () => {
+  const router = useRouter();
   const [activeSlide, setActiveSlide] = useState(0);
 
   const sliderImages = [
@@ -64,7 +66,9 @@ const DocumentaryBanner = () => {
               </span>
             </div>
 
-            <button className="flex items-center cursor-pointer space-x-2 bg-red-600 hover:bg-red-700 px-4 md:px-14 py-2 rounded-md transition-colors mt-4 w-fit">
+            <button
+              onClick={() => router.push("/streaming/show/7")}
+              className="flex items-center cursor-pointer space-x-2 bg-red-600 hover:bg-red-700 px-4 md:px-14 py-2 rounded-md transition-colors mt-4 w-fit">
               <span className="font-medium text-sm md:text-lg">Watch Now</span>
               <span className="text-lg">►</span>
             </button>
