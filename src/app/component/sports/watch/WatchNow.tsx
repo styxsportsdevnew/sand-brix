@@ -73,7 +73,7 @@ export default function WatchNow() {
       id: 1,
       avatar: chatlogo,
       username: 'John Doe',
-      message: 'Hi 😃😃😉 anybody here',
+      message: 'Hi 😃😃😉 anybody here,Hi 😃😃😉 anybody here,Hi 😃😃😉 anybody here,Hi 😃😃😉 anybody here Hi 😃😃😉 anybody hereHi 😃😃😉 anybody hereHi 😃😃😉 anybody here anybody hereHi 😃😃😉 anybody here anybody hereHi 😃😃😉 anybody here anybody hereHi 😃😃😉 anybody here',
       time: '9:45',
        fill:true,
     },
@@ -217,15 +217,17 @@ export default function WatchNow() {
                     key={`${id}-${index}`}
                     className="flex justify-between items-center px-4 text-white py-2"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#863535] flex items-center justify-center text-white font-semibold text-sm select-none">
-                        {getInitials(username)}
-                      </div>
-                      <div className="flex flex-col leading-tight">
-                        <p className="text-[12px] font-semibold">{username}</p>
-                        <p className="text-[10px] text-gray-300">{message}</p>
-                      </div>
-                    </div>
+                  <div className="flex items-start gap-3 w-full">
+  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#863535] flex items-center justify-center text-white font-semibold text-sm select-none">
+    {getInitials(username)}
+  </div>
+  <div className="flex flex-col leading-tight max-w-full break-words">
+    <p className="text-[12px] font-semibold">{username}</p>
+    <p className="text-[10px] text-gray-300 break-words max-w-[230px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px]">
+      {message}
+    </p>
+  </div>
+</div>
                     <div className="flex items-center gap-1 text-gray-400">
                       <EllipsisVertical className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
                       <Star className="w-4 h-4 cursor-pointer hover:scale-105 transition" fill={fill ? 'yellow' : ""} color="yellow" />

@@ -19,7 +19,7 @@ export default function BottomSection() {
   ];
 
   return (
-    <div className="w-full flex justify-center mt-10 px-4 sm:px-6 lg:px-0">
+    <div className="w-full flex justify-center mt-2 px-4 sm:px-6 lg:px-0">
       <div className="flex flex-col lg:flex-row gap-6 max-w-[1200px] w-full">
 
         <div className="flex flex-col gap-4 flex-1">
