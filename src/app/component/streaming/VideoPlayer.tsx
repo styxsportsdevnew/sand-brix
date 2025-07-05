@@ -20,7 +20,8 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
 
   // Toggle Play
-  const togglePlay = () => {
+  const togglePlay = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
       videoRef.current.play();
