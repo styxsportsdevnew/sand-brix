@@ -12,7 +12,6 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import VideoPlayer from "./VideoPlayer";
 
 type Comment = {
   id: number;
