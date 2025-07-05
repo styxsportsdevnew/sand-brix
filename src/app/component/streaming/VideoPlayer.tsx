@@ -123,7 +123,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
         onError={() => console.error("Failed to load video:", src)}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
-        className="w-full h-auto"
+        // className="w-full h-auto"
         // onClick={togglePlay}
       />
 
