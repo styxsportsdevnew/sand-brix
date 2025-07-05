@@ -127,7 +127,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
       />
 
       {/* Center Play/Pause Button for Mobile */}
-      <div className="absolute inset-0 flex items-center justify-center sm:hidden">
+      <div className="absolute inset-0 flex items-center justify-center hidden">
         <button onClick={togglePlay} className="bg-black/50 p-3 rounded-full backdrop-blur-sm">
           {isPlaying ? (
             <Pause size={32} className="text-white" />
@@ -138,7 +138,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
       </div>
 
       {/* Playback Speed - Top Right for Mobile */}
-      <div className="absolute top-4 right-4 sm:hidden" ref={speedRef}>
+      <div className="absolute top-4 right-4 hidden" ref={speedRef}>
         <button
           onClick={() => setShowSpeedMenu(!showSpeedMenu)}
           className="text-sm px-2 py-1 bg-black/50 text-white rounded backdrop-blur-sm">
@@ -166,7 +166,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
       {/* Controls */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 text-white">
         {/* Mobile Layout (sm and below) */}
-        <div className="sm:hidden">
+        <div className="hidden">
           <div className="flex items-center justify-between mb-1">
             <div className="flex items-center gap-1">
               <span className="text-xs">{formatTime(currentTime)}</span>
