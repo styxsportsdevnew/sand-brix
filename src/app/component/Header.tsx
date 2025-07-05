@@ -28,6 +28,11 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
+      const mobileMenuButton = document.querySelector(".mobile-menu-button");
+
+      if (mobileMenuButton && mobileMenuButton.contains(target)) {
+        return;
+      }
       if (dropdownRef.current && !dropdownRef.current.contains(target)) {
         setDropdownOpen(false);
       }
@@ -39,8 +44,9 @@ const Header = () => {
       if (searchRef.current && !searchRef.current.contains(target)) {
         setSearchOpen(false);
       }
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(target))
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
         setMobileMenuOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -98,7 +104,12 @@ const Header = () => {
             <div className="flex items-center">
               {/* Mobile Menu Button */}
               <div className="lg:hidden mr-4 show-mobile">
-                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <button
+                  className="mobile-menu-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setMobileMenuOpen(!mobileMenuOpen);
+                  }}>
                   <svg
                     className="w-7 h-7 text-white cursor-pointer"
                     fill="none"
@@ -280,7 +291,10 @@ const Header = () => {
                   </Link>
                   <X
                     className="w-5 h-5 stroke-3 text-white cursor-pointer"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMobileMenuOpen(false);
+                    }}
                   />
                 </div>
                 {[
