@@ -123,7 +123,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         className="w-full h-auto"
-        onClick={togglePlay}
+        // onClick={togglePlay}
       />
 
       {/* Center Play/Pause Button for Mobile */}
