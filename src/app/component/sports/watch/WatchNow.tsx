@@ -22,14 +22,17 @@ import chatlogo from '@/app/assets/sports/gallary-3.jpg';
 import BottomSection from './BottomSection';
 
 export default function WatchNow() {
-  const chats = Array.from({ length: 25 }).map((_, i) => ({
-    id: i + 1,
-    avatar: chatlogo,
-    username: ['John Doe', 'Jane Smith', 'Mike Johnson'][i % 3],
-    message: `Test message ${i + 1} 🎯`,
-    time: `9:${40 + (i % 20)}`,
-    fill: i % 2 === 0,
-  }));
+  const chats = React.useMemo(() =>
+    Array.from({ length: 25 }).map((_, i) => ({
+      id: i + 1,
+      avatar: chatlogo,
+      username: ['John Doe', 'Jane Smith', 'Mike Johnson'][i % 3],
+      message: `Test message ${i + 1} 🎯`,
+      time: `9:${40 + (i % 20)}`,
+      fill: i % 2 === 0,
+    })),
+    []
+  );
 
   function getInitials(name: string) {
     const names = name.trim().split(' ');
@@ -45,11 +48,12 @@ export default function WatchNow() {
       }}
     >
       <div className="w-full py-2">
-        <div className="flex flex-col lg:flex-row items-start border-b border-[#7070705E] overflow-hidden lg:min-h-[calc(100vh-130px)]">
-          
+        {/* Parent flex container stacks on small, row on large, but min height on all */}
+        <div className="flex flex-col lg:flex-row items-start border-b border-[#7070705E] overflow-hidden min-h-[calc(120vh-130px)]">
+
           {/* Left: Video and Info */}
           <div className="w-full lg:w-[70%] flex flex-col border-b lg:border-b-0 lg:border-r border-[#7070705E]">
-            
+
             {/* Video */}
             <div className="aspect-video bg-cover bg-center relative border border-[#7070705E]">
               <video
@@ -118,84 +122,78 @@ export default function WatchNow() {
           </div>
 
           {/* Right: Chat */}
-          <div className="w-full lg:w-[30%] bg-[#170000] flex flex-col h-full max-h-[calc(100vh-130px)]">
+<div
+  className="w-full lg:w-[30%] flex flex-col bg-[#170000] min-h-0"
+  style={{ height: 'calc(120vh - 130px)' }}
+>
+  {/* Chat Header */}
+  <div className="h-[55px] border-b border-[#7070705E] flex justify-center items-center text-white bg-[#250F0F] flex-shrink-0">
+    <div className="w-full h-full grid grid-cols-2 text-sm">
+      <div className="flex items-center justify-center border-r border-[#7070705E]">
+        <CircleSmall width={15} height={15} color="red" fill="red" /> &nbsp; Live Chat
+      </div>
+      <div className="flex items-center justify-center">Comments</div>
+    </div>
+  </div>
 
-            {/* Header Toggle */}
-            <div className="h-[170px] border-b border-[#7070705E] flex justify-center items-center text-white bg-[#250F0F] cursor-pointer">
-              <div className="w-full h-full grid grid-cols-2 text-sm">
-                <div className="flex items-center justify-center border-r border-[#7070705E]">
-                  <CircleSmall width={15} height={15} color="red" fill="red" /> &nbsp; Live Chat
-                </div>
-                <div className="flex items-center justify-center">Comments</div>
-              </div>
+  {/* Match Info */}
+  <div className="h-[50px] px-4 flex justify-between items-center text-white mt-2 flex-shrink-0">
+    <div className="flex items-center gap-3">
+      <Image
+        src={chatlogo}
+        alt="India national flag"
+        width={50}
+        height={50}
+        className="rounded-full w-[50px] h-[50px] object-cover"
+      />
+      <div className="flex flex-col leading-tight">
+        <p className="text-sm font-medium">England vs India</p>
+        <p className="text-xs text-[#E60019]">7 Participants</p>
+      </div>
+    </div>
+    <Maximize2 className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
+  </div>
+
+  {/* Start of conversation */}
+  <div className="flex flex-col items-center text-white text-[10px] space-y-1 my-2 flex-shrink-0">
+    <p>Start of conversation</p>
+    <div className="bg-[#250F0F] w-24 h-6 flex items-center justify-center">
+      <p>June 28, 2025</p>
+    </div>
+  </div>
+
+  {/* Scrollable Chat List */}
+  <div className="flex-grow min-h-0 overflow-y-auto scrollbar-thin scrollbar-thumb-[#863535] scrollbar-track-[#1c0505]">
+    {chats.length > 0 ? (
+      chats.map(({ id, username, message, time }, index) => (
+        <div
+          key={`${id}-${index}`}
+          className="flex justify-between items-center px-4 text-white py-2"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#863535] flex items-center justify-center text-white font-semibold text-sm select-none">
+              {getInitials(username)}
             </div>
-
-            {/* Match Info */}
-            <div className="h-[50px] px-4 flex justify-between items-center text-white mt-2">
-              <div className="flex items-center gap-3">
-                <Image
-                  src={chatlogo}
-                  alt="India national flag"
-                  width={50}
-                  height={50}
-                  className="rounded-full w-[50px] h-[50px] object-cover"
-                />
-                <div className="flex flex-col leading-tight">
-                  <p className="text-sm font-medium">England vs India</p>
-                  <p className="text-xs text-[#E60019]">7 Participants</p>
-                </div>
-              </div>
-              <Maximize2 className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
-            </div>
-
-            {/* Start of Conversation */}
-            <div className="flex flex-col items-center text-white text-[10px] space-y-1 mb-2">
-              <p>Start of conversation</p>
-              <div className="bg-[#250F0F] w-24 h-6 flex items-center justify-center">
-                <p>June 28, 2025</p>
-              </div>
-            </div>
-
-            {/* Scrollable Chat Messages */}
-            <div
-              className="flex flex-col overflow-y-auto px-1"
-              style={{ flex: '1 1 auto', minHeight: 0 }}
-            >
-              {chats?.length > 0 ? (
-                chats.map(({ id, username, message, time, fill }, index) => (
-                  <div
-                    key={`${id}-${index}`}
-                    className="flex justify-between items-center px-4 text-white py-2"
-                  >
-                    <div className="flex items-start gap-3 w-full">
-                      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#863535] flex items-center justify-center text-white font-semibold text-sm select-none">
-                        {getInitials(username)}
-                      </div>
-                      <div className="flex flex-col leading-tight max-w-full break-words">
-                        <p className="text-[12px] font-semibold">{username}</p>
-                        <p className="text-[10px] text-gray-300 break-words max-w-[400px]">
-                          {message}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-400">
-                      <EllipsisVertical className="w-4 h-4 cursor-pointer hover:scale-105 transition" />
-                      <Star
-                        className="w-4 h-4 cursor-pointer hover:scale-105 transition"
-                        fill={fill ? 'yellow' : 'none'}
-                        color="yellow"
-                      />
-                      <p className="text-[11px] leading-none">{time}</p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="flex justify-center items-center py-8 text-gray-500 text-sm">
-                  No conversations yet.
-                </div>
-              )}
+            <div className="flex flex-col leading-tight">
+              <p className="text-[12px] font-semibold">{username}</p>
+              <p className="text-[10px] text-gray-300">{message}</p>
             </div>
           </div>
+          <div className="flex items-center gap-1 text-gray-400">
+            <EllipsisVertical className="w-3 h-3 cursor-pointer hover:scale-105 transition" />
+            <Star className="w-3 h-3 cursor-pointer hover:scale-105 transition" color="yellow" />
+            <p className="text-[10px] leading-none">{time}</p>
+          </div>
+        </div>
+      ))
+    ) : (
+      <div className="flex justify-center items-center py-8 text-gray-500 text-sm">
+        No conversations yet.
+      </div>
+    )}
+  </div>
+</div>
+
         </div>
       </div>
 
